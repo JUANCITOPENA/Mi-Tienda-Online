@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda online de ejemplo con productos variados, carrito de compras y simulación de pago.">
+    <meta name="keywords" content="ecommerce, tienda online, compras, productos, carrito, html, css, javascript, bootstrap">
+    <title>Mi Tienda Online</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.freepik.com/256/11181/11181797.png?semt=ais_hybrid" type="image/png">
+
+</head>
+<body>
+
+    <!-- Encabezado Fijo -->
+    <header class="header fixed-top bg-light shadow-sm">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="https://cdn-icons-png.freepik.com/256/11181/11181797.png?semt=ais_hybrid" alt="Logo Tienda" width="40" height="40" class="me-2">
+                    <span class="fw-bold">MiTienda</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#categorias">Categorías</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link btn btn-link position-relative" type="button" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="Ver carrito de compras">
+                                <i class="fas fa-shopping-cart me-1"></i> Carrito
+                                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+                                    0
+                                    <span class="visually-hidden">productos en el carrito</span>
+                                </span>
+                            </button>
+                        </li>
+                         <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-white border-end-0"><i class="fas fa-search"></i></span>
+                                <input type="search" id="searchInput" class="form-control border-start-0" placeholder="Buscar productos..." aria-label="Buscar productos">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main>
+        <!-- Sección de Inicio -->
+        <section id="inicio" class="container text-center py-5 mt-nav-fix">
+             <h1 class="display-4 fw-bold mb-3">¡Bienvenido a MiTienda! 🛍️</h1>
+             <p class="lead col-lg-8 mx-auto">Tu lugar ideal para encontrar productos increíbles a precios competitivos. Explora nuestras categorías y llena tu carrito.</p>
+        </section>
+
+        <!-- Sección de Categorías/Productos -->
+        <section id="categorias" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5 fw-bold">Nuestros Productos ✨</h2>
+                <div id="productList" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                    <!-- Las tarjetas de productos se cargarán aquí dinámicamente -->
+                     <div class="col d-flex justify-content-center align-items-center" style="min-height: 300px;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando productos...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página (Opcional pero recomendado) -->
+    <footer class="py-4 bg-dark text-white text-center">
+        <div class="container">
+            <p class="mb-0">© 2024 MiTienda Online. Todos los derechos reservados.</p>
+            <p class="mb-0 small">Diseñado con <i class="fas fa-heart text-danger"></i> y Bootstrap</p>
+        </div>
+    </footer>
+
+    <!-- Modal: Seleccionar Cantidad -->
+    <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="quantityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quantityModalLabel">Seleccionar Cantidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Cuántas unidades de <strong id="quantityProductName">este producto</strong> deseas añadir?</p>
+                    <input type="number" id="quantityInput" class="form-control" value="1" min="1" max="10">
+                     <small class="text-muted">Máximo 10 unidades por producto.</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmQuantityBtn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Carrito de Compras -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cartModalLabel"><i class="fas fa-shopping-cart me-2"></i>Carrito de Compras</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="cartModalBody">
+             <div id="cartItems" class="mb-3">
+                <!-- Los items del carrito se mostrarán aquí -->
+                <p class="text-center text-muted">Tu carrito está vacío.</p>
+             </div>
+             <hr>
+             <div class="d-flex justify-content-end fw-bold fs-5">
+                 <span>Total:</span>
+                 <span id="cartTotal" class="ms-2">$0.00</span>
+             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir comprando</button>
+            <button type="button" class="btn btn-primary" id="checkoutBtn" disabled>
+                <i class="fas fa-credit-card me-1"></i> Proceder al Pago
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Simulación de Pasarela de Pago -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="paymentModalLabel"><i class="fas fa-lock me-2"></i> Pasarela de Pago Segura (Simulación)</h5>
+            <!-- No close button intentionally during payment process -->
+          </div>
+          <div class="modal-body">
+            <form id="paymentForm">
+              <div class="mb-3">
+                  <label for="cardName" class="form-label">Nombre en la Tarjeta</label>
+                  <input type="text" class="form-control" id="cardName" placeholder="Juan Pérez" required>
+              </div>
+              <div class="mb-3">
+                  <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+                  <input type="text" class="form-control" id="cardNumber" placeholder="**** **** **** 1234" pattern="\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}" title="Introduce 16 dígitos" required>
+                  <!-- Basic pattern, not for real validation -->
+              </div>
+              <div class="row">
+                   <div class="col-md-6 mb-3">
+                      <label for="cardExpiry" class="form-label">Fecha Expiración</label>
+                      <input type="month" class="form-control" id="cardExpiry" required>
+                  </div>
+                   <div class="col-md-6 mb-3">
+                      <label for="cardCVC" class="form-label">CVC</label>
+                      <input type="text" class="form-control" id="cardCVC" placeholder="123" pattern="\d{3,4}" title="Introduce 3 o 4 dígitos" required>
+                  </div>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                <label class="form-check-label" for="termsCheck">Acepto los términos y condiciones (simulados)</label>
+              </div>
+              <div class="alert alert-info small">
+                <i class="fas fa-info-circle me-1"></i> Esto es una simulación. No introduzcas datos reales.
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="cancelPaymentBtn" data-bs-dismiss="modal">Cancelar Pago</button>
+            <button type="submit" class="btn btn-success" form="paymentForm" id="finalizePaymentBtn">
+                <i class="fas fa-check-circle me-1"></i> Pagar y Generar Factura
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap JS Bundle (incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Custom JavaScript (defer assures it runs after HTML is parsed) -->
+    <script src="script.js" defer></script>
+
+  </body>
+</html>

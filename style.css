@@ -1,0 +1,280 @@
+/* Estilos Generales y Buenas Prácticas */
+body {
+    padding-top: 70px; /* Ajuste para el header fijo */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+    background-color: #f8f9fa; /* Color de fondo suave */
+    scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
+/* Mejoras de Accesibilidad */
+*:focus-visible {
+    outline: 3px solid dodgerblue; /* Mejor visibilidad del foco */
+    outline-offset: 2px;
+}
+
+/* --- Header --- */
+.header {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.navbar-brand img {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+    transform: rotate(-10deg) scale(1.1); /* Animación sutil al logo */
+}
+
+.nav-link {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    border-radius: 4px; /* Bordes redondeados para hover */
+    padding: 0.5rem 1rem !important; /* Espaciado uniforme */
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #0d6efd !important; /* Color primario de Bootstrap */
+    background-color: rgba(13, 110, 253, 0.1); /* Fondo sutil en hover/active */
+}
+
+/* Estilo para el badge del carrito */
+#cartCount {
+    font-size: 0.7em;
+    padding: 0.3em 0.5em;
+}
+
+/* Ajuste para que el contenido no se oculte detrás del header fijo */
+.mt-nav-fix {
+    margin-top: 70px; /* Equivalente al padding-top del body */
+}
+
+/* --- Sección Inicio --- */
+#inicio h1 {
+    color: #343a40; /* Color oscuro para el título principal */
+}
+
+/* --- Sección Categorías y Productos --- */
+#categorias h2 {
+    color: #495057; /* Color ligeramente más suave para subtítulos */
+}
+
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px; /* Bordes más redondeados */
+    overflow: hidden; /* Asegura que la imagen no se salga */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura en una fila */
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Levanta la tarjeta en hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+}
+
+.card-img-container {
+    height: 200px; /* Altura fija para el contenedor de la imagen */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; /* Fondo blanco para imágenes */
+}
+
+.card-img-top {
+    max-height: 100%; /* Asegura que la imagen se ajuste */
+    width: auto;     /* Mantiene la proporción */
+    max-width: 100%;
+    object-fit: contain; /* Ajusta la imagen dentro del contenedor sin recortar */
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05); /* Zoom sutil en la imagen */
+}
+
+.card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que el cuerpo crezca para llenar espacio */
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    /* Truncar texto si es muy largo */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita a 2 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2.4em; /* Aproximadamente 2 líneas de altura */
+}
+
+.card-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #28a745; /* Verde para el precio */
+    margin-bottom: 1rem;
+    margin-top: auto; /* Empuja el precio hacia abajo */
+}
+
+.card-text { /* Descripción (si la hubiera) */
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+     /* Truncar texto */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 4.05em; /* Aproximadamente 3 líneas */
+}
+
+
+.card .btn {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    width: 100%; /* Botón ocupa todo el ancho */
+}
+
+.card .btn:hover {
+    background-color: #0b5ed7; /* Color primario más oscuro */
+    transform: scale(1.02); /* Ligero crecimiento */
+}
+
+/* --- Modales --- */
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilos para items del carrito en el modal */
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+.cart-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 1rem;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.cart-item-info {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item-actions .form-control {
+    width: 60px;
+    text-align: center;
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+}
+/* Ocultar flechas en input number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.cart-item-actions .btn-remove {
+    color: #dc3545; /* Rojo para eliminar */
+    background: none;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.cart-item-actions .btn-remove:hover {
+    color: #a0212e; /* Rojo más oscuro */
+}
+
+/* --- Campo de Búsqueda --- */
+#searchInput {
+    max-width: 300px; /* Límite para el campo de búsqueda */
+}
+
+/* --- Footer --- */
+footer i.fa-heart {
+     vertical-align: baseline; /* Alinea mejor el corazón */
+}
+
+/* --- Responsividad --- */
+@media (max-width: 991.98px) {
+    body {
+        padding-top: 56px; /* Ajuste para navbar más pequeño en móviles */
+    }
+    .mt-nav-fix {
+        margin-top: 56px;
+    }
+    .navbar-nav .nav-item {
+        margin-bottom: 0.5rem; /* Espacio entre items en menú colapsado */
+    }
+    #searchInput {
+        max-width: 100%; /* Búsqueda ocupa todo el ancho */
+        margin-top: 0.5rem;
+    }
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cart-item-img {
+        margin-bottom: 0.5rem;
+    }
+    .cart-item-actions {
+        margin-top: 0.5rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 575.98px) {
+    #inicio h1 {
+        font-size: 2.5rem; /* Título más pequeño en móviles */
+    }
+     .card-img-container {
+        height: 150px; /* Contenedor de imagen más pequeño */
+    }
+}
